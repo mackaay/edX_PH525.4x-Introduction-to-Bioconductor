@@ -21,6 +21,7 @@ install_github("genomicsclass/tissuesGeneExpression")
 library(tissuesGeneExpression)
 data(tissuesGeneExpression)
 head(e[,1:5])
+
 table(tissue)
 
 #The rows of the matrix e are the features, in this case representing genes, and the columns are the samples. The entries of the matrix are gene expression measurements (in log scale) obtained using a microarray technology. 
