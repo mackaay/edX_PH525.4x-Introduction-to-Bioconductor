@@ -1,0 +1,15 @@
+#
+source("http://www.bioconductor.org/biocLite.R")
+biocLite()
+
+#We can answer such question using Bioconductor tools. The human genome sequence is provided in the BSgenome.Hsapiens.UCSC.hg19 package. If you have not done so already please donwload and install this package. Note that it encodes 3 billion bases and is therefore a large package (over 800MB) so make time to download it especially if you have a slow internet connection.
+library(BiocInstaller)
+biocLite("BSgenome.Hsapiens.UCSC.hg19")
+#Then load the package and note that you now have access to sequence information
+library(BSgenome.Hsapiens.UCSC.hg19)
+BSgenome.Hsapiens.UCSC.hg19
+#Note this divided into chromosomes and includes severla unmapped. We will learn to use this type of object.
+#We can access chromosome 11 like this:
+chr11seq <- BSgenome.Hsapiens.UCSC.hg19[["chr11"]]
+#Here, for example, is a segment of 25 bases starting  at base 1 million 
+subseq(chr11seq,start=10^6,width=25)
