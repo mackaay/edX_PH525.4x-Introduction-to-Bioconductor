@@ -13,3 +13,16 @@ BSgenome.Hsapiens.UCSC.hg19
 chr11seq <- BSgenome.Hsapiens.UCSC.hg19[["chr11"]]
 #Here, for example, is a segment of 25 bases starting  at base 1 million 
 subseq(chr11seq,start=10^6,width=25)
+
+#Note that in the previous assessments we focused on static database information: genome sequence and SNPs. In previous courses we have seen the 'tissuesGeneExpression' data which is experimental data measured with microarrays. If you have not installed it you can do it like this:
+library(devtools)
+install_github("genomicsclass/tissuesGeneExpression")
+#You can load the data:
+library(tissuesGeneExpression)
+data(tissuesGeneExpression)
+head(e[,1:5])
+table(tissue)
+#The rows of the matrix e are the features, in this case representing genes, and the columns are the samples. The entries of the matrix are gene expression measurements (in log scale) obtained using a microarray technology. 
+
+#We can stratify the data and make boxplots like this:
+boxplot(e["209169_at",]~tissue,las=2)
