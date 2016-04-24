@@ -22,7 +22,32 @@ library(tissuesGeneExpression)
 data(tissuesGeneExpression)
 head(e[,1:5])
 table(tissue)
-#The rows of the matrix e are the features, in this case representing genes, and the columns are the samples. The entries of the matrix are gene expression measurements (in log scale) obtained using a microarray technology. 
 
+#The rows of the matrix e are the features, in this case representing genes, and the columns are the samples. The entries of the matrix are gene expression measurements (in log scale) obtained using a microarray technology. 
 #We can stratify the data and make boxplots like this:
 boxplot(e["209169_at",]~tissue,las=2)
+#IDs = c("201884_at", "209169_at", "206269_at", "207437_at", "219832_s_at", "212827_at")
+#Which of the following ID(s) appear to represent a gene specific to placenta? Be careful when you are picking, to pick the correct name or names. 
+for(i in IDs){
+  boxplot(e[i,]~tissue,las=2)
+}
+
+#These objects were originally designed for gene expression data so the methods to extract the high throughput measurements have related names:
+dat = exprs(e)
+dim(dat)
+
+#The information about samples is also stored in this object and the functions to create it try to guarantee that the columns of exprs(e) match the rows of the sample information table. pData is use as shorthand for phenotype data.
+sampleInfo = pData(e)
+dim(sampleInfo)
+head(sampleInfo)
+
+#Because there are certain products that are widely used, Bioconductor makes databases available from which you can extract this information. This way, every object which is linked to this information does not have to carry around the table. Later we will learn to write code like this to extract specific information from these tables:
+library(hgfocus.db)
+annot = select(hgfocus.db, 
+               keys=featureNames(e), 
+               keytype="PROBEID", 
+               columns=c("CHR", "CHRLOC", "SYMBOL"))
+## here we pick one column from the annotation
+annot = annot[ match(featureNames(e),annot$PROBEID), ]
+head(annot)
+dim(annot)
