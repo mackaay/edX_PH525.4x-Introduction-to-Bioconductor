@@ -66,3 +66,22 @@ head(keys(Homo.sapiens, keytype="ENTREZID"))
 select(Homo.sapiens, key="123", keytype="ENTREZID", columns=c("SYMBOL", "ENSEMBL", "ENTREZID", "CHR"))
 #We use the following command to enumerate genes by Entrez ID annotated to this process:
 tab = select(Homo.sapiens, key="circadian rhythm", keytype="TERM", columns=c("ENTREZID"))
+
+#We will now load the sample ExpressionSet object from the previous video, and give it a short variable name.
+library(Biobase)
+data(sample.ExpressionSet)
+sample.ExpressionSet
+samp = sample.ExpressionSet
+#We can now perform convenient operations on the object, where any associated information about the columns or rows remains linked to the experiment information.
+#Note that you can access the information about the samples with:
+pData(samp)
+#For example, to access information about the sex of the samples:
+pData(samp)$sex
+#And you can also use the shorthand:
+samp$sex
+#The experimental data matrix is stored in exprs(samp). We will refer to this as the experiment data in the following problems.
+#The experimental data matrix is stored in exprs(samp). We will refer to this as the experiment data in the following problems.
+
+#Look up the experiment data of the sample ExpressionSet with experimentData(). 
+#Use the annotation() function to look up the annotation information about the experiment data. 
+
