@@ -52,3 +52,17 @@ annot = select(hgfocus.db,
 annot = annot[ match(featureNames(e),annot$PROBEID), ]
 head(annot)
 dim(annot)
+
+library(Homo.sapiens)
+class(Homo.sapiens)
+#We can list all the possible types of keys:
+keytypes(Homo.sapiens)
+#There are also columns in the database, not all of which are keys. To list all the columns:
+columns(Homo.sapiens)
+#We can use Homo.sapiens to count the number of unique Entrez identifiers. To do so, we use the keys() function, which takes two arguments: the database object, and the name of the type of key we are interested in. We use head() to limit the output:
+head(keys(Homo.sapiens, keytype="ENTREZID"))
+
+#We can use the select() function to look up specific values in the database. The following line of code looks up the gene symbol, the Ensembl ID, the Entrez ID, and the chromosome number of the gene with the given Entrez ID, "123".
+select(Homo.sapiens, key="123", keytype="ENTREZID", columns=c("SYMBOL", "ENSEMBL", "ENTREZID", "CHR"))
+#We use the following command to enumerate genes by Entrez ID annotated to this process:
+tab = select(Homo.sapiens, key="circadian rhythm", keytype="TERM", columns=c("ENTREZID"))
