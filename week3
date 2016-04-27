@@ -1,0 +1,12 @@
+#import experimental data
+
+#ExpressionSet and SummerizedExpression
+#ExpressionSet for array
+#SummerizedExpression for NGS data
+
+library(Biobase)
+library(GEOquery)
+geoq <- getGEO("GSE9514")
+names(geoq)
+e <- geoq[[1]]
+
