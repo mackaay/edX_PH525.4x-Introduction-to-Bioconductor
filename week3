@@ -4,9 +4,51 @@
 #ExpressionSet for array
 #SummerizedExpression for NGS data
 
+#ExpressionSet
 library(Biobase)
 library(GEOquery)
 geoq <- getGEO("GSE9514")
 names(geoq)
 e <- geoq[[1]]
+
+dim(e)
+exprs(e)[1:3,1:3]
+dim(exprs(e))
+
+pData(e)[1:3,1:6]
+dim(pData(e))
+names(pData(e))
+pData(e)$characteristics_ch1
+
+fData(e)[1:3,1:3]
+dim(fData(e))
+names(fData(e))
+head(fData(e)$"Gene Symbol")
+head(rownames(e))
+
+experimentData(e)
+annotation(e)
+
+# Summarized Experiment
+library(parathyroidSE)
+data(parathyroidGenesSE)
+se <- parathyroidGenesSE
+se
+
+dim(se)
+assay(se)[1:3,1:3]
+dim(assay(se))
+
+colData(se)[1:3,1:6]
+dim(colData(se))
+names(colData(se))
+colData(se)$treatment
+rowData(se)[1]
+class(rowData(se))
+length(rowData(se))
+head(rownames(se))
+metadata(rowData(se))
+
+exptData(se)$MIAME
+abstract(exptData(se)$MIAME)
 
